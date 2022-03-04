@@ -10,8 +10,9 @@ GraphNode::~GraphNode()
 {
     //// STUDENT CODE
     ////
-
-    delete _chatBot; 
+    
+    // chatbot is already deleted by chat logic and does not need to be deleted here anymore
+    // delete _chatBot; 
 
     ////
     //// EOF STUDENT CODE
