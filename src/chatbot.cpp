@@ -44,6 +44,75 @@ ChatBot::~ChatBot()
 
 //// STUDENT CODE
 ////
+ChatBot::ChatBot(const ChatBot& source)
+{
+    std::cout << "ChatBot Copy Constructor" << std::endl;
+
+    // use copy constructor to create new wxBitap instance on heap (deep copy)
+    _image = new wxBitmap(*(source._image));
+
+    // non owned data handles can be copied per just replicating the pointers
+    _currentNode = source._currentNode;
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+}
+
+ChatBot::ChatBot(ChatBot&& source)
+{
+    std::cout << "ChatBot Move Constructor" << std::endl;
+
+    // initialize the values correctly in this and remove from source
+    _image = source._image;
+    source._image = nullptr;
+
+    _currentNode = source._currentNode;
+    source._currentNode = nullptr;
+
+    _rootNode = source._rootNode;
+    source._rootNode = nullptr;
+
+    _chatLogic = source._chatLogic;
+    source._chatLogic = nullptr;
+}
+
+ChatBot& ChatBot::operator=(const ChatBot& source)
+{
+    std::cout << "ChatBot Copy Assignment" << std::endl;
+
+    // prevent self assignment
+    if(&source == this) return *this;
+
+    // use copy constructor to create new wxBitap instance on heap (deep copy)
+    _image = new wxBitmap(*(source._image));
+
+    // non owned data handles can be copied per just replicating the pointers
+    _currentNode = source._currentNode;
+    _rootNode = source._rootNode;
+    _chatLogic = source._chatLogic;
+}
+
+ChatBot& ChatBot::operator=(ChatBot&& source)
+{
+    std::cout << "ChatBot Move Assignment" << std::endl;
+
+    // prevent self assignment
+    if(&source == this) return *this;
+
+    // delete previous value, initialize the values correctly in this and remove from source
+    delete _image;
+    _image = source._image;
+    source._image = nullptr;
+
+    // initialize the values correctly in this and remove from source, but do NOT delete previous value
+    _currentNode = source._currentNode;
+    source._currentNode = nullptr;
+
+    _rootNode = source._rootNode;
+    source._rootNode = nullptr;
+
+    _chatLogic = source._chatLogic;
+    source._chatLogic = nullptr;
+}
 
 ////
 //// EOF STUDENT CODE

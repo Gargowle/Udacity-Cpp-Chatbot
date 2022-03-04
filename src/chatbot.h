@@ -28,7 +28,13 @@ public:
     ~ChatBot();
 
     //// STUDENT CODE
-    ////
+    //// Rule of Five: Destructor, copy constructor, move constructor, copy assignment, move assignment
+    ChatBot(const ChatBot& source);
+    ChatBot(ChatBot&& source);
+
+    ChatBot& operator=(const ChatBot& source);
+    ChatBot& operator=(ChatBot&& source);
+
 
     ////
     //// EOF STUDENT CODE
